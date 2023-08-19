@@ -7,28 +7,20 @@ const messages = [
 ];
 
 export default function App() {
-  return (
-    <div>
-      <Steps />
-    </div>
-  );
-}
-
-function Steps() {
   // const step = 1;
   const [step, setStep] = useState(1);
   const [isOpen, setIsOpen] = useState(true);
 
-  function handlePrev() {
+  function handlePrevStep() {
     if (step > 1) setStep((s) => s - 1);
   }
 
-  function handleNext() {
+  function handleNextStep() {
     if (step < messages.length) setStep((s) => s + 1);
   }
 
   return (
-    <div>
+    <>
       <button className="close" onClick={() => setIsOpen((isOpen) => !isOpen)}>
         &times;
       </button>
@@ -40,31 +32,24 @@ function Steps() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
           <p className="message">
-            <h3>
-              Step {step}: {messages[step - 1]}
-            </h3>
+            Step {step}: {messages[step - 1]}
           </p>
           <div className="buttons">
-            <Button onClick={handlePrev} bgColor="#7950f2" textColor="#fff">
-              <span>👈</span> Previous
-            </Button>
-            <Button onClick={handleNext} bgColor="#7950f2" textColor="#fff">
-              Next <span>👉</span>
-            </Button>
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handlePrevStep}
+            >
+              Previous
+            </button>
+            <button
+              style={{ backgroundColor: "#7950f2", color: "#fff" }}
+              onClick={handleNextStep}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function Button({ onClick, bgColor, textColor, children }) {
-  return (
-    <button
-      style={{ backgroundColor: bgColor, color: textColor }}
-      onClick={onClick}
-    >
-      {children}
-    </button>
+    </>
   );
 }
