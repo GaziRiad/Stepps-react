@@ -39,11 +39,14 @@ function Steps() {
             <div className={step >= 2 ? "active" : ""}>2</div>
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
-          <p className="message">
+          {/* <div className="message">
             <h3>
-              Step {step}: {messages[step - 1]}
+              Step {step}: 
             </h3>
-          </p>
+          </div> */}
+          <StepMessage step={step}>
+            <span>{messages[step - 1]}</span>
+          </StepMessage>
           <div className="buttons">
             <Button onClick={handlePrev} bgColor="#7950f2" textColor="#fff">
               <span>👈</span> Previous
@@ -58,6 +61,14 @@ function Steps() {
   );
 }
 
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>Step {step}:</h3>
+      {children}
+    </div>
+  );
+}
 function Button({ onClick, bgColor, textColor, children }) {
   return (
     <button
